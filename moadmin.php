@@ -455,7 +455,7 @@ class moadminModel {
         $collections = array();
         $MongoCollectionObjects = $this->mongo->listCollections();
         foreach ($MongoCollectionObjects as $collection) {
-            $collection = substr(strstr((string) $collection, '.'), 1);
+            $collection = htmlspecialchars(substr(strstr((string) $collection, '.'), 1),ENT_QUOTES, 'UTF-8');
             $collections[$collection] = $this->mongo->selectCollection($collection)->count();
         }
         ksort($collections);
