@@ -773,7 +773,7 @@ class moadminComponent {
         $this->mongo['dbs'] = self::$model->listDbs();
         if (isset($_GET['db'])) {
             if (strpos($_GET['db'], '.') !== false) {
-                $_GET['db'] = $_GET['newdb'];
+                $_GET['db'] =  htmlspecialchars($_GET['newdb'], ENT_QUOTES, 'UTF-8');
             }
             self::$model->setDb($_GET['db']);
         }
@@ -2007,7 +2007,7 @@ if ($isAuthenticated) {
     if (!isset($_GET['db'])) {
         $_GET['db'] = moadminModel::$dbName;
     } else if (strpos($_GET['db'], '.') !== false) {
-        $_GET['db'] = $_GET['newdb'];
+        $_GET['db'] = htmlspecialchars($_GET['newdb'], ENT_QUOTES, 'UTF-8');
     }
     try {
         moadminComponent::$model = new moadminModel($_GET['db']);
